@@ -19,7 +19,7 @@ function convertToRoman(num) {
       num -= values[i];
     }
     if (i < values.length - 2) {
-      const subValue = values[i] - values[i + 2]; // e.g. 1000 - 100 = 900
+      const subValue = values[i] - values[i + 2];
       if (num >= subValue) {
         result += symbols[i + 2] + symbols[i];
         num -= subValue;
