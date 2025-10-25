@@ -9,12 +9,30 @@ function convertToRoman(num) {
       6:['I', 1]
     };
 
-  //your code here
+   const symbols = ['M', 'D', 'C', 'L', 'X', 'V', 'I'];
+   const values  = [1000, 500, 100, 50, 10, 5, 1];
+
+  // Loop through all values
+  for (let i = 0; i < values.length; i++) {
+    while (num >= values[i]) {
+      result += symbols[i];
+      num -= values[i];
+    }
+    if (i < values.length - 2) {
+      const subValue = values[i] - values[i + 2]; // e.g. 1000 - 100 = 900
+      if (num >= subValue) {
+        result += symbols[i + 2] + symbols[i];
+        num -= subValue;
+      }
+    }
+  }
+
+  return result;
 
 }
 // You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
 
-// console.log(convertToRoman(36));
+console.log(convertToRoman(36));
 
 
 
