@@ -11,13 +11,26 @@ function convertToRoman(num) {
       5:['V', 5], 
       6:['I', 1]
     };
-  for (let i = 0; i < Object.keys(obj).length; i++) {
-    const symbol = obj[i][0];
-    const value = obj[i][1];
+const keys = Object.keys(obj).map(Number);
 
+  for (let i = 0; i < keys.length; i++) {
+    const [symbol, valueыг] = obj[i];
+    const value = obj[i][1];
+    const sym = obj[i][0];
+
+    // Normal repetition
     while (num >= value) {
-      result += symbol;
+      result += sym;
       num -= value;
+    }
+
+    // Subtractive case (look 2 steps ahead)
+    if (i + 2 < keys.length) {
+      const subValue = value - obj[i + 2][1];
+      if (num >= subValue) {
+        result += obj[i + 2][0] + sym;
+        num -= subValue;
+      }
     }
   }
 
