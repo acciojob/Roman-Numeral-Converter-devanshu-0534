@@ -17,19 +17,17 @@ function convertToRoman(num) {
     const symbol = obj[i][0];
     const value = obj[i][1];
 
-    // ✅ handle subtractive case FIRST (IV, IX, XL, XC, CD, CM)
-    if (i + 2 < Object.keys(obj).length) {
-      const subSymbol = obj[i + 2][0];
-      const subValue = value - obj[i + 2][1];
-
-      if (num >= subValue) {
-        result += subSymbol + symbol;
-        num -= subValue;
-        continue;
-      }
+    // ✅ subtractive ONLY when num < value
+    if (
+      i + 2 < Object.keys(obj).length &&
+      num >= value - obj[i + 2][1] &&
+      num < value
+    ) {
+      result += obj[i + 2][0] + symbol;
+      num -= value - obj[i + 2][1];
+      continue;
     }
 
-    // normal repetition
     while (num >= value) {
       result += symbol;
       num -= value;
@@ -38,6 +36,7 @@ function convertToRoman(num) {
 
   return { roman: result };
 }
+
 
 // You can test your code by running the above function and printing it to console by pressing the run button at the top. To run it with input 36, uncomment the following line
 
