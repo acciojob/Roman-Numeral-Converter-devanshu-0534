@@ -1,5 +1,7 @@
 function convertToRoman(num) {
-	if (num === 0) return "";
+	  if (num === 0) return "";
+
+    let result = "";
   	const obj = {
       0:['M',1000], 
       1:['D', 500], 
@@ -9,24 +11,13 @@ function convertToRoman(num) {
       5:['V', 5], 
       6:['I', 1]
     };
-	let result = "";
-  const values = [
-    1000, 900, 500, 400,
-    100, 90, 50, 40,
-    10, 9, 5, 4, 1
-  ];
+  for (let i = 0; i < Object.keys(obj).length; i++) {
+    const symbol = obj[i][0];
+    const value = obj[i][1];
 
-  const symbols = [
-    "M", "CM", "D", "CD",
-    "C", "XC", "L", "XL",
-    "X", "IX", "V", "IV", "I"
-  ];
-
-  // Loop through all values
-  for (let i = 0; i < values.length; i++) {
-    while (num >= values[i]) {
-      result += symbols[i];
-      num -= values[i];
+    while (num >= value) {
+      result += symbol;
+      num -= value;
     }
   }
 
